@@ -5,9 +5,16 @@ import {
   getContactActionError,
   getContactActionRequest,
   getContactActionSuccess,
+  removeContactActionError,
+  removeContactActionRequest,
+  removeContactActionSuccess,
 } from 'components/redux/contacts/contactsSlice';
 
-import { addContactApi, getContactsApi } from 'services/firebasApi';
+import {
+  addContactApi,
+  getContactsApi,
+  removeContactsApi,
+} from 'services/firebasApi';
 
 export const addOperationContacts = newcontacts => {
   return dispatch => {
@@ -23,4 +30,11 @@ export const getOperationContacts = () => dispatch => {
   getContactsApi()
     .then(data => dispatch(getContactActionSuccess(data)))
     .catch(error => dispatch(getContactActionError(error.message)));
+};
+
+export const deleteOperationContacts = id => dispatch => {
+  dispatch(removeContactActionRequest());
+  removeContactsApi(id)
+    .then(data => dispatch(removeContactActionSuccess(id)))
+    .catch(err => dispatch(removeContactActionError(err.message)));
 };

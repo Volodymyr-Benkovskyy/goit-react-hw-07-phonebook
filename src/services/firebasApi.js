@@ -18,6 +18,10 @@ export const getContactsApi = () => {
     );
 };
 
+export const removeContactsApi = id => {
+  return axios.delete(`/BookContacts/${id}.json`).then(respons => respons.data);
+};
+
 //Метод << Object.entries >> є частиною JavaScript і використовується для отримання масиву,
 //що містить масиви пар ключ - значення з властивостей об'єкта,
 //який передається у якості аргументу.Кожен підмасив в масиві містить =>
@@ -35,4 +39,4 @@ export const getContactsApi = () => {
 // :
 // "-Nd0iYefw2ZoVY1tfKSt"
 
-// using the server firebaseio for requests methods post end get
+// using the server firebaseio for requests method delete axois

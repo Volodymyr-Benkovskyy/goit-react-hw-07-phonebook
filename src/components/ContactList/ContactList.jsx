@@ -3,7 +3,7 @@
 import s from './ContactList.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStoreContacts, getStoreFilter } from 'components/redux/selectors';
-import { removeContact } from 'components/redux/contacts/contactsSlice';
+import { deleteOperationContacts } from 'components/redux/contacts/contactsOperation';
 
 
 const ContactList = () => {
@@ -12,7 +12,7 @@ const ContactList = () => {
   const contacts = useSelector(getStoreContacts);
   const filter = useSelector(getStoreFilter)
 
-
+  console.log("hello word");
   const filterContactsByName = () => filter
     
       ? contacts.filter( itemsContact =>
@@ -29,10 +29,12 @@ const ContactList = () => {
             <span>
               {name}: {number}
             </span>
+            
+
             <button
               className={s.contactBtnDel  }  
               type="button"
-              onClick={() => dispatch(removeContact(id))}>
+              onClick={() => dispatch(deleteOperationContacts(id))}>
               Delete
             </button>
           </li>
@@ -46,21 +48,6 @@ const ContactList = () => {
 export default ContactList;
 
 
-//  <ul className={s.contactList}>
+
      
     
-//     { contacts.length !== 0 &&
-//     filterContactsByName().map(({ id, name, number }) => {
-//       return (
-//         <ul>      
-//         <li className={s.contactItem} key={id}>
-//           {name}: {number}
-//           <button className={s.contactBtnDel} onClick={() => dispatch(removeContact(id))} type="button">
-//             Delete
-//           </button>
-//         </li>
-//         </ul>
-       
-//       );
-//     })}
-  //  </ul>

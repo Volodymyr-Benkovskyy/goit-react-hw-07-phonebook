@@ -32,16 +32,26 @@ const contactsSlice = createSlice({
       state.error = payload;
     },
 
-    removeContact(state, action) {
-      const index = state.contacts.findIndex(
-        contact => contact.id === action.payload
-      );
-      state.contacts.splice(index, 1);
+    removeContactActionRequest(state) {
+      state.isLoading = true;
+    },
+
+    removeContactActionSuccess(state, { payload }) {
+      state.isLoading = false;
+      state.contacts = state.contacts.filter(el => el.id !== payload);
+    },
+
+    removeContactActionError(state, { payload }) {
+      state.isLoading = false;
+      state.error = payload;
     },
   },
 });
 
 export const {
+  removeContactActionRequest,
+  removeContactActionSuccess,
+  removeContactActionError,
   getContactActionError,
   getContactActionSuccess,
   getContactActionRequest,
