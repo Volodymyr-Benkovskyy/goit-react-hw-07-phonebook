@@ -3,7 +3,7 @@
 import s from './ContactList.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStoreContacts, getStoreFilter } from 'components/redux/selectors';
-import { removeContact } from 'components/redux/contactsSlice';
+import { removeContact } from 'components/redux/contacts/contactsSlice';
 
 
 const ContactList = () => {
@@ -15,10 +15,10 @@ const ContactList = () => {
 
   const filterContactsByName = () => filter
     
-      ? contacts.filter(contact =>
-          contact.name.toLowerCase().includes(filter.toLowerCase())
+      ? contacts.filter( itemsContact =>
+          itemsContact.name.toLowerCase().includes(filter.toLowerCase())
         )
-      : contacts;
+      : contacts ;
   
   return (
    
@@ -29,8 +29,6 @@ const ContactList = () => {
             <span>
               {name}: {number}
             </span>
-            
-          
             <button
               className={s.contactBtnDel  }  
               type="button"

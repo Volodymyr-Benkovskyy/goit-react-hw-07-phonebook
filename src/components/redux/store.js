@@ -1,38 +1,36 @@
 import { configureStore } from '@reduxjs/toolkit';
-import contactsReducer from './contactsSlice';
+import contactsReducer from './contacts/contactsSlice';
 import filterReducer from './filterSlice';
-import storage from 'redux-persist/lib/storage';
 
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
-
-const persistConfig = {
-  key: 'contacts',
-  storage: storage,
+const customLogger = store => {
+  return next => {
+    return action => {
+      console.group('action ', action.type);
+      const { getState } = store;
+      const prevState = getState();
+      console.log('prevState', prevState);
+      console.log(action);
+      next(action);
+      const nextState = getState();
+      console.log('nextState :>> ', nextState);
+      console.groupEnd();
+    };
+  };
 };
 
-const persistedContactsReducer = persistReducer(persistConfig, contactsReducer);
+// міделвар
+const thunk = store => next => action => {
+  if (typeof action === 'function') {
+    action(store.dispatch, store.getState);
+    return;
+  }
+  next(action);
+};
 
 export const store = configureStore({
   reducer: {
-    contacts: persistedContactsReducer,
+    contacts: contactsReducer,
     filter: filterReducer,
   },
-  middleware: getDefaultMiddleware => [
-    ...getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-  ],
+  middleware: getDefaultMiddleware => [...getDefaultMiddleware(), customLogger],
 });
-
-export const persistor = persistStore(store);
