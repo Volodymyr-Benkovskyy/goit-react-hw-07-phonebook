@@ -1,5 +1,11 @@
 
 
+
+
+
+
+
+
 import s from './ContactList.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStoreContacts, getStoreFilter } from 'components/redux/selectors';
@@ -10,15 +16,16 @@ const ContactList = () => {
   const dispatch = useDispatch();
 
   const contacts = useSelector(getStoreContacts);
-  const filter = useSelector(getStoreFilter)
+  const filter = useSelector(getStoreFilter);
 
-  console.log("hello word");
+  
   const filterContactsByName = () => filter
     
       ? contacts.filter( itemsContact =>
           itemsContact.name.toLowerCase().includes(filter.toLowerCase())
         )
-      : contacts ;
+    : contacts;  
+
   
   return (
    

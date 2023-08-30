@@ -58,7 +58,6 @@ export const {
   addContactActionRequest,
   addContactActionSuccess,
   addContactActionError,
-  removeContact,
 } = contactsSlice.actions;
 
 export default contactsSlice.reducer;

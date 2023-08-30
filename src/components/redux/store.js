@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import contactsReducer from './contacts/contactsSlice';
-import filterReducer from './filterSlice';
+import filterReducer from './contacts/filterSlice';
 
 const customLogger = store => {
   return next => {
     return action => {
       console.group('action ', action.type);
-      const { getState } = store;
+      const { getState, dispatch } = store;
       const prevState = getState();
       console.log('prevState', prevState);
       console.log(action);

@@ -1,10 +1,14 @@
 
+
 import s from './Filter.module.css';
 import { useDispatch } from 'react-redux';
-import { setFilter}  from 'components/redux/filterSlice';
+import { setFilter } from 'components/redux/contacts/filterSlice';
+
+
 
 const Filter = () => {
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  
   return (
     <div className={s.filterBox}>
       <label className={s.filterText}>Find contacts by name</label>
@@ -12,7 +16,7 @@ const Filter = () => {
         className={s.filterInput}
         type="text"
         onChange={(event) => {
-         dispatch(setFilter(event)) ;
+         dispatch( setFilter(event)) ;
         }}
       />
     </div>

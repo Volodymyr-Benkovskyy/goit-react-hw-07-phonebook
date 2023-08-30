@@ -14,7 +14,7 @@ import {
   addContactApi,
   getContactsApi,
   removeContactsApi,
-} from 'services/firebasApi';
+} from 'services/mockapiApi';
 
 export const addOperationContacts = newcontacts => {
   return dispatch => {
