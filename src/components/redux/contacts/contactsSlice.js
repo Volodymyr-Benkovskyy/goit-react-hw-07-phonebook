@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const contactsSlice = createSlice({
-  name: 'BookContacts',
+  name: 'contacts',
   initialState: {
-    contacts: [],
+    items: [],
     isLoading: false,
     error: null,
   },
@@ -13,7 +13,7 @@ const contactsSlice = createSlice({
     },
     addContactActionSuccess(state, { payload }) {
       state.isLoading = false;
-      state.contacts.push(payload);
+      state.items.push(payload);
     },
     addContactActionError(state, { payload }) {
       state.isLoading = false;
@@ -25,7 +25,7 @@ const contactsSlice = createSlice({
     },
     getContactActionSuccess(state, { payload }) {
       state.isLoading = false;
-      state.contacts = payload;
+      state.items = payload;
     },
     getContactActionError(state, payload) {
       state.isLoading = false;
@@ -38,7 +38,9 @@ const contactsSlice = createSlice({
 
     removeContactActionSuccess(state, { payload }) {
       state.isLoading = false;
-      state.contacts = state.contacts.filter(el => el.id !== payload);
+      state.items = state.items.filter(el => el.id !== payload);
+      /*    const index = state.items.findIndex(contact => contact.id === payload.id);
+      state.items.splice(index, 1); */
     },
 
     removeContactActionError(state, { payload }) {

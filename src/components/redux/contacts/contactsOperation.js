@@ -9,18 +9,17 @@ import {
   removeContactActionRequest,
   removeContactActionSuccess,
 } from 'components/redux/contacts/contactsSlice';
-
 import {
   addContactApi,
   getContactsApi,
   removeContactsApi,
-} from 'services/mockapiApi';
+} from 'services/firebaseioApi';
 
-export const addOperationContacts = newcontacts => {
+export const addOperationContacts = items => {
   return dispatch => {
     dispatch(addContactActionRequest());
-    addContactApi(newcontacts)
-      .then(newContact => dispatch(addContactActionSuccess(newcontacts)))
+    addContactApi(items)
+      .then(items => dispatch(addContactActionSuccess(items)))
       .catch(error => dispatch(addContactActionError(error.message)));
   };
 };

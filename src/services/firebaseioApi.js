@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-//volodymyr-1-default-rtdb.firebaseio.com/
+axios.defaults.baseURL =
+  'https://bookcontacts-47551-default-rtdb.firebaseio.com/';
 
-axios.defaults.baseURL = 'https://64efa105219b3e2873c4b865.mockapi.io';
-
-export const addContactApi = contacts => {
-  return axios.post('/contacts', contacts).then(respons => {
+export const addContactApi = items => {
+  return axios.post('/contacts.json', items).then(respons => {
     const { data } = respons;
-    return { ...contacts, id: data.name };
+    return { ...items, id: data.name };
   });
 };
 
@@ -20,7 +19,7 @@ export const getContactsApi = () => {
 };
 
 export const removeContactsApi = id => {
-  return axios.delete(`/contacts/${id}`).then(respons => respons.data);
+  return axios.delete(`/contacts/${id}.json`).then(respons => respons.data);
 };
 
 //Метод << Object.entries >> є частиною JavaScript і використовується для отримання масиву,
