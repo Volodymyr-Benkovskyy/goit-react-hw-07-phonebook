@@ -38,5 +38,3 @@ export const removeContactsApi = id => {
 // name
 // :
 // "-Nd0iYefw2ZoVY1tfKSt"
-
-// using the server firebaseio for requests method delete axois
